@@ -103,5 +103,21 @@ describe 'rotate shapes', ->
 
     it 'should return Z rotated when shape Z', ->
         actual = shapes.rotate('Z', 'R', 1)
-        expect(actual.length).toBe 3
-        expect(actual[0].length).toBe 3
+        expect(actual).toBe shapes.getZShape()[1]
+    it 'should return Z reflected rotated shape RZ', ->
+        actual = shapes.rotate('RZ', 'R', 1)
+        expect(actual).toBe shapes.getZReflectedShape()[1]
+
+    it 'should return I rotated when shape I', ->
+        actual = shapes.rotate('I', 'R', 1)
+        expect(actual).toBe shapes.getIShape()[1]
+
+    it 'should return T rotated when shape T', ->
+        actual = shapes.rotate('T', 'R', 1)
+        expect(actual).toBe shapes.getTShape()[1]
+
+    it 'should return Cube rotated when shape Cube', ->
+        actual = shapes.rotate('cube', 'R', 1)
+        expect(actual).toBe shapes.getCubeShape()
+
+
