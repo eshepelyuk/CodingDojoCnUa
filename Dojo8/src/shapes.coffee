@@ -28,13 +28,12 @@ l = [
 Z = [
     [
         [1, 1, 0],
-        [0, 1, 0],
         [0, 1, 1]
     ],
     [
-        [0, 0, 1],
-        [1, 1, 1],
-        [1, 0, 0]
+        [0, 1],
+        [1, 1],
+        [1, 0]
     ]
 ]
 
@@ -69,13 +68,12 @@ cube = [
 ZReflected = [
     [
         [0, 1, 1],
-        [0, 1, 0],
         [1, 1, 0]
     ]
     [
-        [1, 0, 0],
-        [1, 1, 1],
-        [0, 0, 1]
+        [1, 0],
+        [1, 1],
+        [0, 1]
     ]
 ]
 LReflected = [
@@ -161,5 +159,9 @@ exports.rotateI = (direction, count) ->
 
 exports.rotate = (shape, direction, count) ->
     if 'L' is shape then return this.rotateL(direction, count)
-    else if 'RL' then return this.rotateLReflected(direction, count)
-    else if 'Z' then return this.rotateZ(direction,  count)
+    else if 'RL' is shape then return this.rotateLReflected(direction, count)
+    else if 'Z' is shape then return this.rotateZ(direction,  count)
+    else if 'RZ' is shape then return this.rotateZReflected(direction, count)
+    else if 'I' is shape then return this.rotateI(direction, count)
+    else if 'T' is shape then return this.rotateT(direction, count)
+    else if 'cube' is shape then return this.rotateCube(direction, count)
