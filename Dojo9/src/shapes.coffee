@@ -131,7 +131,6 @@ exports.getCubeShape = () ->
 exports.getIShape = () ->
     return I
 
-
 exports.rotateL = (direction, count) ->
     if 'L' == direction then return l[(4 - count) % 4]
     return l[count % 4]
