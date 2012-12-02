@@ -1,8 +1,8 @@
 {
 	"name": "CodingDojoCnUa",
-	"version": "0.9.1",
+	"version": "0.9.0",
 	"scripts": {
-		"test": "jasmine-node --coffee ./Dojo9/src"
+		"test": "jasmine-node --coffee --verbose ./Dojo9"
 	},
 	"dependencies": {
 		"coffee-script": ">=1.4.0",
