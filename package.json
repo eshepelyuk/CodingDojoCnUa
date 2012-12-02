@@ -3,5 +3,9 @@
 	"version": "0.9.1",
 	"scripts": {
 		"test": "jasmine-node --coffee ./Dojo9/src"
+	},
+	"dependencies": {
+		"coffee-script": ">=1.4.0",
+		"jasmine-node": ">=1.0.26"
 	}
 }
