@@ -1,1 +1,0 @@
-exports.myFunc = (param) -> "called with #{param}"
