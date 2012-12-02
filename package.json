@@ -1,0 +1,7 @@
+{
+	"name": "CodingDojoCnUa",
+	"version": "0.9.1",
+	"scripts": {
+		"test": "jasmine-node --coffee ./Dojo9/src"
+	}
+}
