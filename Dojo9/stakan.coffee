@@ -8,13 +8,13 @@ exports.moveRight = (stakan, sprite, count = 1) ->
   delta = (if count < 0 then 0 else count)
   if (sprite.rightX + delta) > stakan.width
     delta = stakan.width - sprite.rightX
-  {leftX: sprite.leftX + delta, rightX:  sprite.rightX + delta, bottomY: sprite.bottomY, state: sprite.state}
+  {leftX: sprite.leftX + delta, rightX: sprite.rightX + delta, bottomY: sprite.bottomY, state: sprite.state}
 
-exports.moveLeft = (sprite,count = 1) ->
+exports.moveLeft = (sprite, count = 1) ->
   delta = (if count < 0 then 0 else count)
   if (sprite.leftX - delta) < 0
     delta = sprite.leftX
-  {leftX: sprite.leftX - delta, rightX:  sprite.rightX - delta, bottomY: sprite.bottomY, state: sprite.state}
+  {leftX: sprite.leftX - delta, rightX: sprite.rightX - delta, bottomY: sprite.bottomY, state: sprite.state}
 
 
 exports.rotate = (stakan, shape, direction, count = 1) ->
