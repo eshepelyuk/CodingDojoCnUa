@@ -109,6 +109,7 @@ I = [
     ]
 ]
 
+
 exports.getLShape = () ->
     return l
 
@@ -164,16 +165,3 @@ exports.rotate = (shape, direction, count) ->
     else if 'I' is shape then return this.rotateI(direction, count)
     else if 'T' is shape then return this.rotateT(direction, count)
     else if 'cube' is shape then return this.rotateCube(direction, count)
-
-exports.rotateAnyShapeFromAnyPos = ( shape, direction, count) ->
-    retval = {
-        type: shape.type,
-        state: 0,
-        bottomY: null,
-        leftX: null,
-        rightX: null
-    }
-
-    retval.state = (shape.state + count)%2
-
-    return retval
