@@ -3,10 +3,10 @@ package dojo12
 import (
 	"github.com/orfjackal/gospec/src/gospec"
 	. "github.com/orfjackal/gospec/src/gospec"
-	//"fmt"
+	. "dojo12/server"
 )
 
-func MySpec(c gospec.Context) {
+func BatcherSortSpec(c gospec.Context) {
 	c.Specify("Should return max power of 2 less then value", func() {
 			value := 14
 			expected := 3
@@ -37,8 +37,7 @@ func MySpec(c gospec.Context) {
 			blockSize := 8
 			offset := 0
 			expected := []int{1, 0, 0, 1, 0, 1, 1, 0}
-			doSwap(inputArr, fromPos, toPos, dist, blockSize, offset)
-//			fmt.Println(inputArr)
+			DoSwap(inputArr, fromPos, toPos, dist, blockSize, offset)
 			for i := 0; i < len(inputArr); i++ {
 				c.Expect(inputArr[i], Equals, expected[i])
 			}

@@ -1,4 +1,4 @@
-package dojo12
+package server
 
 import (
 	"math"
@@ -13,7 +13,7 @@ func GetMaxPowerOf2(val int) int {
 	return int(math.Log2(float64(val)))
 }
 
-func doSwap(arr[]int, fromPos int, toPos int, dist int, blockSize int, offset int) {
+func DoSwap(arr[]int, fromPos int, toPos int, dist int, blockSize int, offset int) {
 	for i := fromPos; i <= toPos; i++ {
 		//		fmt.Println("step ", i)
 		if (i & blockSize) == offset {
@@ -47,7 +47,7 @@ func SortArray(inputChannel chan [] int) chan [] int {
 		for q := x; q >= p ; q/=2 {
 
 
-			doSwap(inputArr, 0, lenArr - dist - 1, dist, p, r)
+			DoSwap(inputArr, 0, lenArr - dist - 1, dist, p, r)
 
 			dist = q - p
 			r = p
