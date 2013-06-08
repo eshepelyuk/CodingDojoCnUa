@@ -6,10 +6,11 @@ import (
 	"net/http"
 	"log"
 	"dojo12/server"
+	"sort"
 )
 
 func main() {
-	fmt.Println("qwe", server.ServerFunc())
+	fmt.Println("Server started", server.ServerFunc())
 	http.Handle("/myapp", websocket.Handler(Echo))
 	if err := http.ListenAndServe(":8080", nil); err != nil {
 		log.Fatal("ListenAndServe:", err)
@@ -17,8 +18,14 @@ func main() {
 }
 
 func Echo(c *websocket.Conn) {
-	var s string
-	fmt.Fscan(c, &s)
-	fmt.Println("Received:", s)
-	fmt.Fprint(c, "How do you do???")
+	var receivedData []int
+
+	websocket.JSON.Receive(c, &receivedData)
+	fmt.Println("Received :", receivedData)
+
+	sort.Ints(receivedData)
+
+	fmt.Println("Sorted :", receivedData)
+
+	websocket.JSON.Send(c, receivedData)
 }
