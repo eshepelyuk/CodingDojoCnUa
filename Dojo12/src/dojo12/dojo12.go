@@ -53,9 +53,8 @@ func SortArray(inputChannel chan [] int) chan [] int {
 			r = p
 		}
 	}
-
 	outputChan := make(chan [] int, lenArr)
-
+	outputChan <- inputArr
 	return outputChan
 }
 
