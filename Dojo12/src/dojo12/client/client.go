@@ -3,21 +3,21 @@ package client
 import (
 	"code.google.com/p/go.net/websocket"
 	"fmt"
+	. "dojo12/domain"
 )
 
-func SendRequest(inArr []int) []int {
-	var responseArr []int
-
+func SendRequest(requestData *TaskData) (*TaskData) {
+	responseData  := new(TaskData)
 	ws, err := websocket.Dial("ws://localhost:8080/myapp", "", "http://localhost:8080")
 	if err != nil {
 		panic(err)
 	}
 
-	fmt.Println("Sent :", inArr)
-	websocket.JSON.Send(ws, inArr)
+	fmt.Println("Sent :", 	requestData)
+	websocket.JSON.Send(ws, requestData)
 
-	websocket.JSON.Receive(ws, &responseArr)
-	fmt.Println("Received :", responseArr)
+	websocket.JSON.Receive(ws, &responseData)
+	fmt.Println("Received :", responseData)
 
-	return responseArr
+	return responseData
 }
