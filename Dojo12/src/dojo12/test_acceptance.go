@@ -5,8 +5,8 @@ import (
 	. "github.com/orfjackal/gospec/src/gospec"
 	. "dojo12/client"
 	. "dojo12/domain"
-//	"dojo12/domain"
-//	"dojo12/server"
+	"dojo12/domain"
+	"dojo12/server"
 )
 
 func AcceptanceSpec(c gospec.Context) {
@@ -22,7 +22,7 @@ func AcceptanceSpec(c gospec.Context) {
 			c.Expect(result.TaskData, Equals, expectedData.TaskData)
 		})
 
-	/*c.Specify("When send unsorted strings data should return sorted strings data", func() {
+	c.Specify("When send unsorted strings data should return sorted strings data", func() {
 
 			actualData := &TaskData{0, SORT, "7, 3, 20, 5"}
 			expectedData := &TaskData{0, SORT, "3, 5, 7, 20"}
@@ -68,7 +68,7 @@ func AcceptanceSpec(c gospec.Context) {
 			}
 
 
-		})*/
+		})
 }
 
 

@@ -12,26 +12,8 @@ import (
 func HandleConn(c *websocket.Conn) {
 	var receivedData = new(TaskData)
 
-	/*var data string
-	websocket.JSON.Receive(c, &data)
-	fmt.Println("handler Received :", data)*/
-
 	websocket.JSON.Receive(c, &receivedData)
 	fmt.Println("handler Received :", *receivedData)
-
-//	go websocket.JSON.Send(c, "test1")
-//	var data2 = []byte{0, 1, 2}
-//	go websocket.Message.Send(c, data2)
-
-	var resp = TaskData{1,2,"hello"}
-//	var resp = []TaskData{TaskData{1, 2, "hello"}}
-	go websocket.JSON.Send(c, resp)
-//	go websocket.Message.Send(c, resp)
-
-//	for{
-//		websocket.JSON.Receive(c, &receivedData)
-//	}
-	return
 
 //	fmt.Println("Connection saved", c)
 	Connections[receivedData.TaskId] = c
@@ -52,12 +34,14 @@ func HandleConn(c *websocket.Conn) {
 	send(Connections[receivedData.TaskId], responseData)
 //	go websocket.JSON.Send(Connections[receivedData.TaskId], responseData)
 //	ReqChannel <- receivedData
-
 }
 
 func send(c *websocket.Conn, d *TaskData) {
 	fmt.Println("Response data 222 ", *d)
 	go websocket.JSON.Send(c, d)
+
+	var dummyWait TaskData
+	websocket.JSON.Receive(c, &dummyWait)
 }
 
 func DontUseThis() {
