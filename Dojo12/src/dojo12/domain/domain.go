@@ -1,4 +1,3 @@
-
 package domain
 
 const (
@@ -13,3 +12,10 @@ type TaskData struct {
 	TaskType int
 	TaskData string
 }
+
+type ResponseData struct {
+	TaskId int
+	ResultData string
+}
+
+
