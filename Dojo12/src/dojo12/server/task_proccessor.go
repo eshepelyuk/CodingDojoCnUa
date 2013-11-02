@@ -15,8 +15,11 @@ func TaskProcessor(requestChanel chan domain.TaskData, responseChannel chan doma
 		case domain.PING:
 			result.ResultData = ExecutePing(&currentTask)
 		}
+
 		if result != nil {
 			result.TaskId = currentTask.TaskId
+			print(currentTask.TaskId)
+			print(result.TaskId)
 			responseChannel <- *result
 		}
 	}

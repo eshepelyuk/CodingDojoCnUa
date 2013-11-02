@@ -41,7 +41,7 @@ func ExecuteSort(requestData *TaskData) (string) {
 	sortArr := make([]int, len(strArr))
 	for i, strValue := range strArr {
 		rezInt64, _ := ParseInt(strings.TrimSpace(strValue) , 10, 0)
-		print(rezInt64)
+//		print(rezInt64)
 		sortArr[i] = int(rezInt64)
 	}
 
