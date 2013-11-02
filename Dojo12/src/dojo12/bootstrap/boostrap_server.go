@@ -9,6 +9,9 @@ import (
 )
 
 func main() {
+	go DontUseThis()
+	http.Handle("/myapp", websocket.Handler(HandleConn))
+	log.Print("Server started")
 	log.Print("Server started")
 	RequestChannel := make(chan domain.TaskData)
 	ResponseChannel := make(chan domain.ResponseData)

@@ -1,5 +1,9 @@
 package domain
 
+import (
+	"code.google.com/p/go.net/websocket"
+)
+
 const (
 	STATUS = 1
 	KILL   = 2
@@ -17,5 +21,11 @@ type ResponseData struct {
 	TaskId int
 	ResultData string
 }
+
+
+
+var Connections map[int]*websocket.Conn = make(map[int]*websocket.Conn)
+
+var ReqChannel chan * TaskData = make(chan * TaskData, 1)
 
 
