@@ -10,10 +10,10 @@ func TaskProcessor(requestChanel chan domain.TaskData, responseChannel chan doma
 		var result *domain.ResponseData = new (domain.ResponseData)
 		switch currentTask.TaskType{
 		case domain.SORT:
-			result.ResultData = ExecuteSort(&currentTask)
+			result.ResultData = ExecuteSort(&currentTask).TaskData
 			break
 		case domain.PING:
-			result.ResultData = ExecutePing(&currentTask)
+			result.ResultData = ExecutePing(&currentTask).TaskData
 			break
 		case domain.KILL:
 			return

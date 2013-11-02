@@ -23,10 +23,10 @@ func HandleConn(c *websocket.Conn) {
 	var responseData = new(TaskData)
 	switch receivedData.TaskType{
 	case PING:
-		responseData = executePing(receivedData)
+		responseData = ExecutePing(receivedData)
 		break
 	case SORT:
-		responseData = executeSort(receivedData)
+		responseData = ExecuteSort(receivedData)
 		break
 	}
 	fmt.Println("Response data: ", responseData)
@@ -51,10 +51,10 @@ func DontUseThis() {
 		var responseData = new(TaskData)
 		switch receivedData.TaskType{
 		case PING:
-			responseData = executePing(receivedData)
+			responseData = ExecutePing(receivedData)
 			break
 		case SORT:
-			responseData = executeSort(receivedData)
+			responseData = ExecuteSort(receivedData)
 			break
 		}
 		fmt.Println("Response data: ", responseData)
@@ -65,11 +65,11 @@ func DontUseThis() {
 	fmt.Println("Exception: exit from ReqChannel")
 }
 
-func executePing(requestData *TaskData) (*TaskData) {
+func ExecutePing(requestData *TaskData) (*TaskData) {
 	return requestData
 }
 
-func executeSort(requestData *TaskData) (*TaskData) {
+func ExecuteSort(requestData *TaskData) (*TaskData) {
 //	sortArr := []string{"3", "5", "7", "20"}
 	strArr := strings.Split( requestData.TaskData, "," )
 	sortArr := make( []int, len( strArr ) )
