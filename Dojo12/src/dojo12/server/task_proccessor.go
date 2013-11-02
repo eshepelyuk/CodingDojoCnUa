@@ -14,6 +14,9 @@ func TaskProcessor(requestChanel chan domain.TaskData, responseChannel chan doma
 			break
 		case domain.PING:
 			result.ResultData = ExecutePing(&currentTask)
+			break
+		case domain.KILL:
+			return
 		}
 
 		if result != nil {
