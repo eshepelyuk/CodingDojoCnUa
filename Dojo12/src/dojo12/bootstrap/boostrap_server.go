@@ -8,8 +8,9 @@ import (
 )
 
 func main() {
-	log.Print("Server started")
+	go DontUseThis()
 	http.Handle("/myapp", websocket.Handler(HandleConn))
+	log.Print("Server started")
 	if err := http.ListenAndServe(":8080", nil); err != nil {
 		log.Fatal("ListenAndServe:", err)
 	}

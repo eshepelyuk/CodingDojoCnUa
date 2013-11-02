@@ -20,14 +20,14 @@ func AcceptanceSpec(c gospec.Context) {
 			c.Expect(result.TaskData, Equals, expectedData.TaskData)
 		})
 
-	c.Specify("When send unsorted strings data should return sorted strings data", func() {
-
-			actualData := &TaskData{0, SORT, "7, 3, 20, 5"}
-			expectedData := &TaskData{0, SORT, "3, 5, 7, 20"}
-
-			var result = SendRequest(actualData)
-			c.Expect(result.TaskData, Equals, expectedData.TaskData)
-	})
+//	c.Specify("When send unsorted strings data should return sorted strings data", func() {
+//
+//			actualData := &TaskData{1, SORT, "7, 3, 20, 5"}
+//			expectedData := &TaskData{1, SORT, "3, 5, 7, 20"}
+//
+//			var result = SendRequest(actualData)
+//			c.Expect(result.TaskData, Equals, expectedData.TaskData)
+//	})
 }
 
 
