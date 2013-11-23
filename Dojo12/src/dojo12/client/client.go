@@ -13,10 +13,11 @@ func SendRequest(requestData *TaskData) (*ResponseData) {
 	}
 
 	fmt.Println("Client sending:", 	requestData)
-	websocket.JSON.Send(ws, requestData)
+	errCode := websocket.JSON.Send(ws, requestData)
+	fmt.Println("Client sending errCode:", errCode)
 
 	responseData := new(ResponseData)
-	errCode := websocket.JSON.Receive(ws, responseData)
+	errCode = websocket.JSON.Receive(ws, responseData)
 	fmt.Println("client Received :", responseData)
 	fmt.Println("client Received errCode :", errCode)
 

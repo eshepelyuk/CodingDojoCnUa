@@ -1,7 +1,6 @@
 package domain
 
 import (
-	"code.google.com/p/go.net/websocket"
 )
 
 const (
@@ -10,6 +9,7 @@ const (
 	PING   = 3
 	SORT   = 20
 )
+
 
 type TaskData struct {
 	TaskId int
@@ -22,9 +22,7 @@ type ResponseData struct {
 	ResultData string
 }
 
-
-
-var Connections map[int]*websocket.Conn = make(map[int]*websocket.Conn)
+var TaskMapping map[int]chan string = make(map[int]chan string)
 
 var RequestChannel = make(chan TaskData, 100)
 var ResponseChannel = make(chan ResponseData, 100)

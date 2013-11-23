@@ -3,53 +3,29 @@ package server
 import (
 	"code.google.com/p/go.net/websocket"
 	"fmt"
-	"sort"
-	"strings"
 	. "dojo12/domain"
-	. "strconv"
-	"time"
 )
 
 func HandleConn(c *websocket.Conn) {
+	fmt.Println("WS handler start")
 	var receivedData = new(TaskData)
 
-	websocket.JSON.Receive(c, &receivedData)
-	fmt.Println("handler Received :", *receivedData)
+	errCode  := websocket.JSON.Receive(c, &receivedData)
+	fmt.Println("WS handler received :", *receivedData)
+	fmt.Println("WS handler errCode :", errCode)
 
-	Connections[receivedData.TaskId] = c
+	TaskMapping[receivedData.TaskId] = make(chan string, 1)
+
 	RequestChannel <- *receivedData
 
-	time.Sleep( 20 * time.Second)
+	respStr := <- TaskMapping[receivedData.TaskId]
+	websocket.JSON.Send(c, &ResponseData{receivedData.TaskId, respStr})
 
-	fmt.Println("handler timedout")
+	fmt.Println("WS handler stop")
 
-	// get result data from resp chan
-//	send(Connections[receivedData.TaskId], responseData)
+// TODO Multiple tasks support
+// TODO Handle client timeout
+// TODO Return task status
 }
-
-
-
-func ExecuteSort(requestData *TaskData) (*TaskData) {
-//	sortArr := []string{"3", "5", "7", "20"}
-	strArr := strings.Split( requestData.TaskData, "," )
-	sortArr := make( []int, len( strArr ) )
-	for i,strValue := range strArr {
-		rezInt64, _ := ParseInt(strings.TrimSpace(strValue) , 10, 0)
-		print(rezInt64)
-		sortArr[i] = int( rezInt64 )
-	}
-
-	sort.Ints(sortArr)
-
-	rezIntArr := make( []string, len( strArr ) )
-	for i,intValue := range sortArr {
-		rezIntArr[i] = FormatInt( int64( intValue ), 10 )
-	}
-
-	responseData := new(TaskData)
-	responseData.TaskData = strings.Join(rezIntArr, ", ")
-	return responseData
-}
-
 
 

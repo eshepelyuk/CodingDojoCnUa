@@ -5,34 +5,28 @@ import (
 	"fmt"
 )
 
-func TaskProcessor(requestChanel chan TaskData, responseChannel chan ResponseData){
-	fmt.Println( "TaskProcessor started" )
+func TaskProcessor(requestChanel chan TaskData){
 	for ;; {
-		fmt.Println( "for TaskProcessor started" )
 		var currentTask = <- requestChanel
-		fmt.Println( "for TaskProcessor receive from chanel" )
-		var result *ResponseData = new (ResponseData)
+		fmt.Println( "TaskProcessor receive from chanel", currentTask)
+
+// TODO remove switch. Create universal method to add new tasks
 		switch currentTask.TaskType{
 		case SORT:
-			result.ResultData = ExecuteSort(&currentTask).TaskData
+			// TODO call Batcher sort
 			break
 		case PING:
-			result.ResultData = ExecutePing(&currentTask).TaskData
+			go execPing(&currentTask)
 			break
 		case KILL:
 			return
 		}
-
-		if result != nil {
-			result.TaskId = currentTask.TaskId
-			responseChannel <- *result
-		}
 	}
 }
 
-func ExecutePing(requestData *TaskData) (*TaskData) {
-	fmt.Println("ExecutePing Received :", *requestData)
-	return requestData
+func execPing(task *TaskData) {
+	fmt.Println("ExecutePing Received: ", *task)
+	TaskMapping[task.TaskId] <- task.TaskData
 }
 
 
