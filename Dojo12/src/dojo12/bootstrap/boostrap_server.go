@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-
+	go ResponseSender(ResponseChannel)
 	go TaskProcessor(RequestChannel, ResponseChannel)
 	http.Handle("/myapp", websocket.Handler(HandleConn))
 	log.Print("Server started")

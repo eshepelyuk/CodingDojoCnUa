@@ -6,11 +6,11 @@ import (
 )
 
 func TaskProcessor(requestChanel chan TaskData, responseChannel chan ResponseData){
-	print( "TaskProcessor started\n" )
+	fmt.Println( "TaskProcessor started" )
 	for ;; {
-		print( "for TaskProcessor started\n" )
+		fmt.Println( "for TaskProcessor started" )
 		var currentTask = <- requestChanel
-		print( "for TaskProcessor 2\n" )
+		fmt.Println( "for TaskProcessor receive from chanel" )
 		var result *ResponseData = new (ResponseData)
 		switch currentTask.TaskType{
 		case SORT:
@@ -25,9 +25,7 @@ func TaskProcessor(requestChanel chan TaskData, responseChannel chan ResponseDat
 
 		if result != nil {
 			result.TaskId = currentTask.TaskId
-			print(currentTask.TaskId)
-			print(result.TaskId)
-//			responseChannel <- *result
+			responseChannel <- *result
 		}
 	}
 }
