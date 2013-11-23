@@ -26,6 +26,7 @@ type ResponseData struct {
 
 var Connections map[int]*websocket.Conn = make(map[int]*websocket.Conn)
 
-var ReqChannel chan * TaskData = make(chan * TaskData, 1)
+var RequestChannel = make(chan TaskData, 100)
+var ResponseChannel = make(chan ResponseData, 100)
 
 

@@ -1,21 +1,25 @@
 package server
 
 import (
-	"dojo12/domain"
+	. "dojo12/domain"
+	"fmt"
 )
 
-func TaskProcessor(requestChanel chan domain.TaskData, responseChannel chan domain.ResponseData){
+func TaskProcessor(requestChanel chan TaskData, responseChannel chan ResponseData){
+	print( "TaskProcessor started\n" )
 	for ;; {
+		print( "for TaskProcessor started\n" )
 		var currentTask = <- requestChanel
-		var result *domain.ResponseData = new (domain.ResponseData)
+		print( "for TaskProcessor 2\n" )
+		var result *ResponseData = new (ResponseData)
 		switch currentTask.TaskType{
-		case domain.SORT:
+		case SORT:
 			result.ResultData = ExecuteSort(&currentTask).TaskData
 			break
-		case domain.PING:
+		case PING:
 			result.ResultData = ExecutePing(&currentTask).TaskData
 			break
-		case domain.KILL:
+		case KILL:
 			return
 		}
 
@@ -23,9 +27,14 @@ func TaskProcessor(requestChanel chan domain.TaskData, responseChannel chan doma
 			result.TaskId = currentTask.TaskId
 			print(currentTask.TaskId)
 			print(result.TaskId)
-			responseChannel <- *result
+//			responseChannel <- *result
 		}
 	}
+}
+
+func ExecutePing(requestData *TaskData) (*TaskData) {
+	fmt.Println("ExecutePing Received :", *requestData)
+	return requestData
 }
 
 

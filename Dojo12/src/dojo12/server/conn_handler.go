@@ -15,62 +15,20 @@ func HandleConn(c *websocket.Conn) {
 	websocket.JSON.Receive(c, &receivedData)
 	fmt.Println("handler Received :", *receivedData)
 
-//	fmt.Println("Connection saved", c)
 	Connections[receivedData.TaskId] = c
-//	ReqChannel <- receivedData
-//	fmt.Println("Sent")
+	RequestChannel <- *receivedData
 
-
-	var responseData = new(TaskData)
-	switch receivedData.TaskType{
-	case PING:
-		responseData = ExecutePing(receivedData)
-		break
-	case SORT:
-		responseData = ExecuteSort(receivedData)
-		break
-	}
-	fmt.Println("Response data: ", responseData)
-	send(Connections[receivedData.TaskId], responseData)
-//	go websocket.JSON.Send(Connections[receivedData.TaskId], responseData)
-//	ReqChannel <- receivedData
+	// get result data from resp chan
+//	send(Connections[receivedData.TaskId], responseData)
 }
 
-func send(c *websocket.Conn, d *TaskData) {
+/*func send(c *websocket.Conn, d *TaskData) {
 	fmt.Println("Response data 222 ", *d)
 	go websocket.JSON.Send(c, d)
 
 	var dummyWait TaskData
 	websocket.JSON.Receive(c, &dummyWait)
-}
-
-func DontUseThis() {
-	fmt.Println("DontUseThis started")
-	for receivedData := range ReqChannel {
-//	for {
-//		receivedData := <-ReqChannel
-		fmt.Println("ReqChannel recv", receivedData)
-
-		var responseData = new(TaskData)
-		switch receivedData.TaskType{
-		case PING:
-			responseData = ExecutePing(receivedData)
-			break
-		case SORT:
-			responseData = ExecuteSort(receivedData)
-			break
-		}
-		fmt.Println("Response data: ", responseData)
-		fmt.Println("Connection to send ", Connections[receivedData.TaskId])
-
-		go websocket.JSON.Send(Connections[receivedData.TaskId], receivedData)
-	}
-	fmt.Println("Exception: exit from ReqChannel")
-}
-
-func ExecutePing(requestData *TaskData) (*TaskData) {
-	return requestData
-}
+}*/
 
 func ExecuteSort(requestData *TaskData) (*TaskData) {
 //	sortArr := []string{"3", "5", "7", "20"}

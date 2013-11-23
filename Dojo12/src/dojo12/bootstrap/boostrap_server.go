@@ -5,14 +5,10 @@ import (
 	"net/http"
 	"log"
 	. "dojo12/server"
-	"dojo12/domain"
+	. "dojo12/domain"
 )
 
 func main() {
-	go DontUseThis()
-
-	RequestChannel := make(chan domain.TaskData)
-	ResponseChannel := make(chan domain.ResponseData)
 
 	go TaskProcessor(RequestChannel, ResponseChannel)
 	http.Handle("/myapp", websocket.Handler(HandleConn))
