@@ -17,7 +17,7 @@ func ResponseSender(responseChannel chan ResponseData){
 
 func send(c *websocket.Conn, d ResponseData) {
 	fmt.Println("Server sending response" + d.ResultData);
-	websocket.JSON.Send(c, "qwerty")
+	websocket.JSON.Send(c, &d)
 }
 
 
