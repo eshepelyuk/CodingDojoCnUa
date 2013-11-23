@@ -13,13 +13,12 @@ func AcceptanceSpec(c gospec.Context) {
 
 	c.Specify("When send structed data should return stracted data", func() {
 
-			expectedData := &TaskData{0, PING, "3, 5, 7, 20"}
+			expectedData := &ResponseData{0, "3, 5, 7, 20"}
 			actualData := &TaskData{0, PING, "3, 5, 7, 20"}
 
 			var result = SendRequest(actualData)
 			c.Expect(result.TaskId,   Equals, expectedData.TaskId)
-			c.Expect(result.TaskType, Equals, expectedData.TaskType)
-			c.Expect(result.TaskData, Equals, expectedData.TaskData)
+			c.Expect(result.ResultData, Equals, expectedData.ResultData)
 		})
 
 	/*c.Specify("When send unsorted strings data should return sorted strings data", func() {

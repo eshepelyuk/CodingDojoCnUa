@@ -6,18 +6,21 @@ import (
 	. "dojo12/domain"
 )
 
-func SendRequest(requestData *TaskData) (*TaskData) {
+func SendRequest(requestData *TaskData) (*ResponseData) {
 	ws, err := websocket.Dial("ws://localhost:8080/myapp", "", "http://localhost:8080")
 	if err != nil {
 		panic(err)
 	}
 
-	fmt.Println("Sent :", 	requestData)
+	fmt.Println("Client sending:", 	requestData)
 	websocket.JSON.Send(ws, requestData)
 
-	responseData  := new(TaskData)
-	websocket.JSON.Receive(ws, responseData)
-	fmt.Println("client Received :", *responseData)
+	var res []string
 
+	errCode := websocket.JSON.Receive(ws, res)
+	fmt.Println("client Received1 :", res)
+	fmt.Println("client Received errCode :", errCode)
+
+	responseData := new(ResponseData)
 	return responseData
 }

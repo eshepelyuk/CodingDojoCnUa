@@ -7,6 +7,7 @@ import (
 	"strings"
 	. "dojo12/domain"
 	. "strconv"
+	"time"
 )
 
 func HandleConn(c *websocket.Conn) {
@@ -18,17 +19,15 @@ func HandleConn(c *websocket.Conn) {
 	Connections[receivedData.TaskId] = c
 	RequestChannel <- *receivedData
 
+	time.Sleep( 20 * time.Second)
+
+	fmt.Println("handler timedout")
+
 	// get result data from resp chan
 //	send(Connections[receivedData.TaskId], responseData)
 }
 
-/*func send(c *websocket.Conn, d *TaskData) {
-	fmt.Println("Response data 222 ", *d)
-	go websocket.JSON.Send(c, d)
 
-	var dummyWait TaskData
-	websocket.JSON.Receive(c, &dummyWait)
-}*/
 
 func ExecuteSort(requestData *TaskData) (*TaskData) {
 //	sortArr := []string{"3", "5", "7", "20"}
